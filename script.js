@@ -20,3 +20,24 @@ BONUS
 - keyboard support(event listener)
 
 */
+
+function add (a, b){
+    return a + b;
+}
+
+function subtract (a, b){
+    return a - b;
+}
+
+function multiply (a, b){
+    return a * b;
+}
+
+function divide (a, b){
+    if (b === 0){
+        alert ("You won't fool me into dividing by zero again! Fool me once, shame on you, fool me twice... UNDEFINED");
+        return 0;
+    } else {
+        return a / b;
+    }
+}

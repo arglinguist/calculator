@@ -1,5 +1,4 @@
 /* 
--make OPERATE function that takes an operator & 2 numbers and calls one of the above
 - CLEAR function wipes ALL exisiting data
 - create function to populate DISPLAY & updates with solution when operate is called
 - *KEY* Figure out how to store all values and call operator function with them.

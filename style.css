@@ -1,5 +1,93 @@
 /* 
 - pick a color palette, assign related colors to numbers, complementary colors to operations and display
+    Operators=TAN: 
+        darkest/outline = #724C26 
+        dark = #724C26 
+        medium = #BF7F3F 
+        light/active = #BCA389
+    Numbers=BLUE: 
+        darkest/outline =#264C72 
+        dark =#3F7FBF 
+        medium =#0C6DCF 
+        light/active = #9CB5CE
+    OTHER:
+        Offblack = #191919
+        Offwhite = #F1E8E8
 - find a subtle background pattern related to palette
 - have buttons change color when active (and later include event listener for keyboard)
 */
+body{
+    background-color: beige;
+    background: url("backgrounds/bg01.jpg");
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#calc{
+    background-color: #191919;
+    width: fit-content;
+    outline-style: solid;
+    outline-color: #191919;
+    margin: auto;
+    margin-top: 50px;
+    display: grid;
+    padding: 0px;
+    grid-template-columns: repeat(4, 55px);
+    grid-template-rows: repeat(6, 55px);
+    justify-items: stretch;
+    
+}
+#display{
+    grid-column: 1/5;
+    grid-row: 1/2;
+    background-color: #191919;
+    color: #F1E8E8;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: right;
+    font-size: larger;
+    padding: 25px;
+}
+#adjust{
+    grid-column: 1/4;
+    grid-row: 2/3;
+}
+#operators{
+    grid-column: 4/5;
+    grid-row: 2/7;
+
+}
+#buttons{
+    grid-column: 1/4;
+    grid-row: 3/7;
+}
+button{
+    outline-style: solid;
+    text-align: center;
+    vertical-align: middle;
+    font-size: large;
+    border: none;
+    margin: 0px;
+    align-self: center;
+    width: 50px;
+    height: 50px;
+}
+
+button.op{
+    background-color: #BF7F3F;
+}
+button.num{
+    background-color: #3F7FBF;
+}
+button.adj{
+    background-color: #264C72;
+}
+button.num:active{
+    background-color: #9CB5CE;
+    outline: none;
+}
+button.adj:active{
+    background-color: #9CB5CE;
+    outline: none;
+}
+button.op:active{
+    background-color: #BCA389;
+    outline: none;
+}

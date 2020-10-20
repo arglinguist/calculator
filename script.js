@@ -1,9 +1,4 @@
 /* 
--make functions for each operation
-    - ADD
-    - SUBTRACT
-    - MULTIPLY
-    - DIVIDE (give snarky message for /0)
 -make OPERATE function that takes an operator & 2 numbers and calls one of the above
 - CLEAR function wipes ALL exisiting data
 - create function to populate DISPLAY & updates with solution when operate is called
@@ -20,7 +15,26 @@ BONUS
 - keyboard support(event listener)
 
 */
-
+function operate (a, b, opp){
+    let result = 0;
+    switch (opp){
+        case "+":
+            result = add (a, b);
+            break;
+        case "-":
+            result = subtract (a, b);
+            break;
+        case "*":
+            result = multiply (a, b);
+            break;
+        case "/":
+            result = divide (a, b);
+            break;
+        default: 
+            alert ("Uh-oh, captain... something went wrong.")
+    }
+    return result;
+}
 function add (a, b){
     return a + b;
 }

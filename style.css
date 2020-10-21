@@ -1,3 +1,9 @@
+/* Remaining issues: 
+1: upper borders on buttons when clicking?
+2: removing spacing between buttons/grid sections?
+3: are last buttons slightly taller than others? 
+*/
+
 body{
     background-color: beige;
     background: url("backgrounds/bg01.jpg");
@@ -56,6 +62,7 @@ button.num{
 button.adj{
     background-color: #264C72;
 }
+
 button.num:active{
     background-color: #9CB5CE;
 }

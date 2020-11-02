@@ -14,8 +14,35 @@ BONUS
 - keyboard support(event listener)
 */
 
-// Assign buttons 
- 
+// Assign buttons for...
+// operators and digits
+ const addButton = document.getElementById("add"),
+     subButton = document.getElementById("sub"),
+     mulButton = document.getElementById("mult"),
+     divButton = document.getElementById("divide"),
+     eqButton = document.getElementById("equals"),
+     button1 = document.getElementById("1"),
+     button2 = document.getElementById("2"),
+     button3 = document.getElementById("3"),
+     button4 = document.getElementById("4"),
+     button5 = document.getElementById("5"),
+     button6 = document.getElementById("6"),
+     button7 = document.getElementById("7"),
+     button8 = document.getElementById("8"),
+     button9 = document.getElementById("9"),
+     button0 = document.getElementById("0");
+//special buttons
+const decButton = document.getElementById("."),
+     backButton = document.getElementById("back"),
+     clearButton = document.getElementById("clear"),
+     reverseButton = document.getElementById("rev"),
+     percButton = document.getElementById("%");
+
+let display = document.getElementById("display");
+
+function setDisplay(newContent){
+    display.textContent=newContent;
+}
 
 // The maths...
 function operate (a, b, opp){

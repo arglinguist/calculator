@@ -1,7 +1,5 @@
 /* Remaining issues: 
-1: upper borders on buttons when clicking?
-2: removing spacing between buttons/grid sections?
-3: are last buttons slightly taller than others? 
+
 */
 
 body{
@@ -51,6 +49,9 @@ button{
     width: 50px;
     height: 50px; 
     justify-self: center;
+    margin-top: 3px;
+    padding: 0px;
+    outline: none;
 }
 
 button.op{

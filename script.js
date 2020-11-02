@@ -12,8 +12,12 @@ BONUS
 - decimal (only once)
 - backspace
 - keyboard support(event listener)
-
 */
+
+// Assign buttons 
+ 
+
+// The maths...
 function operate (a, b, opp){
     let result = 0;
     switch (opp){

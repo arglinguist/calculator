@@ -20,7 +20,7 @@ BONUS
      mulButton = document.getElementById("mult"),
      divButton = document.getElementById("divide"),
      eqButton = document.getElementById("equals"),
-     button1 = document.getElementById("1"),
+     /*button1 = document.getElementById("1"),
      button2 = document.getElementById("2"),
      button3 = document.getElementById("3"),
      button4 = document.getElementById("4"),
@@ -30,7 +30,7 @@ BONUS
      button8 = document.getElementById("8"),
      button9 = document.getElementById("9"),
      button0 = document.getElementById("0"),
-     decButton = document.getElementById("."),
+     decButton = document.getElementById("."),*/
      backButton = document.getElementById("back"),
      clearButton = document.getElementById("clear"),
      reverseButton = document.getElementById("rev"),
@@ -41,9 +41,13 @@ let currentDisplay = "0",
     currentA = 0, 
     currentB = 0,
     currentResult = 0,
-    currentOperator = "+";
+    currentOperator = "+",
+    digitGroup = document.getElementsByClassName("digit");
 
-//digits --- can this be consolidated into an array??
+
+
+
+/*
 button0.onclick = function(){
     currentDisplay += "0";
     setDisplay(currentDisplay);
@@ -84,11 +88,29 @@ button9.onclick = function(){
     currentDisplay += "9";
     setDisplay(currentDisplay);
 };
+*/
+
+
+getInput();
+
 clearButton.onclick = function(){
     reset();
 }
 
-//functions
+backButton.onclick = function(){
+    currentDisplay = removeLast(currentDisplay);
+    setDisplay(currentDisplay);
+}
+
+function getInput(){
+    for (let button in digitGroup){ //adds any digit to display when clicked
+       digitGroup[button].addEventListener('click', function(){ //WHY is safari flagging as not a function? Seems to work...
+            currentDisplay += digitGroup[button].id;
+            setDisplay(currentDisplay);
+        });
+    }
+}
+
 function setDisplay(newContent){
         //need to shorten if too long for display
     newContent*=1;
@@ -101,21 +123,16 @@ function clearDisplay(){
 
 function reset(){
     clearDisplay();
-    //do
+    //placeholders; make sure these actually reset.
+    currentDisplay = "0",
     currentA = 0, 
     currentB = 0,
     currentResult = 0,
     currentOperator = "+";
 }
 
-
 function removeLast(str){
-    let length = str.length;
-        newStr = "";
-    for (i = 0; i<length-1; i++){
-        newStr += str.char[i];
-    }
-    return newStr;
+    return str.substr(0, str.length-1);
 }
 
 

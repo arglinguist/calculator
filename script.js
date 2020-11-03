@@ -51,6 +51,15 @@ percButton.onclick = function(){
     setDisplay(currentDisplay);
 };
 
+//WORKING ON THIS -- adds first 2 values correctly but then there are issues storing data. Come back to it later. Maybe simplify to make an event listener that differentiates operator by button (e.g. switch statement?) but otherwise has single function for this?
+addButton.onclick = function(){
+    currentB = currentDisplay;
+    currentDisplay = operate(currentA, currentB, currentOperator);
+    setDisplay(currentDisplay);
+    currentA = currentB;    
+    currentDisplay=0;
+    currentOperator="+";
+}
 
 function getInput(){
     for (let button in digitGroup){ //adds any digit to display when clicked
@@ -104,6 +113,8 @@ function operate (a, b, opp){
     return result;
 }
 function add (a, b){
+    a*=1;
+    b*=1;
     return a + b;
 }
 

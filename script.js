@@ -1,5 +1,4 @@
 /* 
-- CLEAR function wipes ALL exisiting data
 - create function to populate DISPLAY & updates with solution when operate is called
 - *KEY* Figure out how to store all values and call operator function with them.
 
@@ -10,7 +9,6 @@ WATCH OUT
 
 BONUS
 - decimal (only once)
-- backspace
 - keyboard support(event listener)
 */
 
@@ -20,17 +18,6 @@ BONUS
      mulButton = document.getElementById("mult"),
      divButton = document.getElementById("divide"),
      eqButton = document.getElementById("equals"),
-     /*button1 = document.getElementById("1"),
-     button2 = document.getElementById("2"),
-     button3 = document.getElementById("3"),
-     button4 = document.getElementById("4"),
-     button5 = document.getElementById("5"),
-     button6 = document.getElementById("6"),
-     button7 = document.getElementById("7"),
-     button8 = document.getElementById("8"),
-     button9 = document.getElementById("9"),
-     button0 = document.getElementById("0"),
-     decButton = document.getElementById("."),*/
      backButton = document.getElementById("back"),
      clearButton = document.getElementById("clear"),
      reverseButton = document.getElementById("rev"),
@@ -44,54 +31,7 @@ let currentDisplay = "0",
     currentOperator = "+",
     digitGroup = document.getElementsByClassName("digit");
 
-
-
-
-/*
-button0.onclick = function(){
-    currentDisplay += "0";
-    setDisplay(currentDisplay);
-};
-button1.onclick = function(){
-    currentDisplay += "1";
-    setDisplay(currentDisplay);
-};
-button2.onclick = function(){
-    currentDisplay += "2";
-    setDisplay(currentDisplay);
-};
-button3.onclick = function(){
-    currentDisplay += "3";
-    setDisplay(currentDisplay);
-};
-button4.onclick = function(){
-    currentDisplay += "4";
-    setDisplay(currentDisplay);
-};
-button5.onclick = function(){
-    currentDisplay += "5";
-    setDisplay(currentDisplay);
-};
-button6.onclick = function(){
-    currentDisplay += "6";
-    setDisplay(currentDisplay);
-};
-button7.onclick = function(){
-    currentDisplay += "7";
-    setDisplay(currentDisplay);
-};
-button8.onclick = function(){
-    currentDisplay += "8";
-    setDisplay(currentDisplay);
-};
-button9.onclick = function(){
-    currentDisplay += "9";
-    setDisplay(currentDisplay);
-};
-*/
-
-
-getInput();
+getInput(); //calls function with event listeners... needs to be adjusted to remove alerts
 
 clearButton.onclick = function(){
     reset();
@@ -112,7 +52,7 @@ function getInput(){
 }
 
 function setDisplay(newContent){
-        //need to shorten if too long for display
+    //TO DO: need to shorten if too long for display
     newContent*=1;
     display.textContent = `${newContent}`;
 }
@@ -123,7 +63,6 @@ function clearDisplay(){
 
 function reset(){
     clearDisplay();
-    //placeholders; make sure these actually reset.
     currentDisplay = "0",
     currentA = 0, 
     currentB = 0,
@@ -134,9 +73,6 @@ function reset(){
 function removeLast(str){
     return str.substr(0, str.length-1);
 }
-
-
-// The maths...
 function operate (a, b, opp){
     let result = 0;
     switch (opp){
@@ -171,7 +107,7 @@ function multiply (a, b){
 
 function divide (a, b){
     if (b === 0){
-        alert ("You won't fool me into dividing by zero again! Fool me once, shame on you, fool me twice... UNDEFINED");
+        alert ("You won't fool me into dividing by zero! Fool me once, shame on you, fool me twice... Anyway, here's a zero.");
         return 0;
     } else {
         return a / b;

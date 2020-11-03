@@ -91,8 +91,8 @@ clearButton.onclick = function(){
 //functions
 function setDisplay(newContent){
         //need to shorten if too long for display
-        //get rid of leading 0
-    display.textContent = newContent;
+    newContent*=1;
+    display.textContent = `${newContent}`;
 }
 
 function clearDisplay(){

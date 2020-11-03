@@ -12,8 +12,7 @@ BONUS
 - keyboard support(event listener)
 */
 
-// Assign buttons 
- const addButton = document.getElementById("add"),
+const addButton = document.getElementById("add"),
      subButton = document.getElementById("sub"),
      mulButton = document.getElementById("mult"),
      divButton = document.getElementById("divide"),
@@ -24,6 +23,7 @@ BONUS
      percButton = document.getElementById("%");
 
 const display = document.getElementById("display");
+
 let currentDisplay = "0",
     currentA = 0, 
     currentB = 0,
@@ -31,16 +31,26 @@ let currentDisplay = "0",
     currentOperator = "+",
     digitGroup = document.getElementsByClassName("digit");
 
-getInput(); //calls function with event listeners... needs to be adjusted to remove alerts
 
 clearButton.onclick = function(){
     reset();
-}
+};
 
 backButton.onclick = function(){
     currentDisplay = removeLast(currentDisplay);
     setDisplay(currentDisplay);
-}
+};
+
+reverseButton.onclick = function(){
+    currentDisplay*= -1;
+    setDisplay(currentDisplay);
+};
+
+percButton.onclick = function(){
+    currentDisplay/= 100;
+    setDisplay(currentDisplay);
+};
+
 
 function getInput(){
     for (let button in digitGroup){ //adds any digit to display when clicked
@@ -113,3 +123,7 @@ function divide (a, b){
         return a / b;
     }
 }
+
+
+
+getInput(); //calls function with event listeners... needs to be adjusted to remove alerts

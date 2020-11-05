@@ -51,32 +51,46 @@ percButton.onclick = function(){
 
 //Maybe simplify to make an event listener that differentiates operator by button (e.g. switch statement?) but otherwise has single function for this?
 addButton.onclick = function(){
-    runCalculation();
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
     currentOperator="+";
 }
 
 subButton.onclick = function(){
-    runCalculation();
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
     currentOperator="-";
 }
 
 divButton.onclick = function(){
-    runCalculation();
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
     currentOperator="/";
 }
 
 mulButton.onclick = function(){
-    runCalculation();
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
     currentOperator="*";
 }
 
 eqButton.onclick = function(){
-    runCalculation();
+    shiftData();
+    runCalc();
 }
 
 
 //STICKING POINT --> a zero keeps sneaking in, so subtraction/addition works but not multiplication/division. FIRST run works, but not subsequent. Somthing wr)
-function runCalculation(){
+
+/*function runCalculation(){
 
     currentA = prevCalc;
     currentB = currentDisplay*1;    
@@ -85,7 +99,22 @@ function runCalculation(){
     setDisplay(currentDisplay);
 
     prevCalc = currentDisplay*1;
-    currentDisplay = 0; //<-- likely source of problems
+    currentDisplay = "0"; //<-- likely source of problems
+} */
+
+function shiftData(){
+    currentA = prevCalc;
+    currentB = currentDisplay*1;
+}    
+function runCalc(){
+    currentDisplay = operate(currentA, currentB, currentOperator);  
+    setDisplay(currentDisplay);
+}
+function storeData(){
+    prevCalc = currentDisplay*1;
+}
+function clearDisplayCache(){
+    currentDisplay = "0"; //<-- likely source of problems
 }
 function getInput(){
     for (let button in digitGroup){ //adds any digit to display when clicked

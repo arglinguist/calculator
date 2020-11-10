@@ -26,6 +26,7 @@ let currentDisplay = "0",
     currentA = 0, 
     currentB = 0,
     prevCalc = 0,
+    prevOperator = "+",
     currentOperator = "+",
     digitGroup = document.getElementsByClassName("digit");
 
@@ -60,14 +61,17 @@ divButton.onclick = function(){
 mulButton.onclick = function(){
     useOperator("*");
 }
-eqButton.onclick = function(){
+//THE PROBLEM IS THE END OF =, A 2ND HIT OF "=" or any other funtion thereafter causes issues. 
+
+eqButton.onclick = function(){ //I need this to perform the calculation using the previous operator if the current operator is already =. AND don't mess up the stored data.
     shiftData();
     runCalc();
-    //storeData();
+    storeData();
     clearDisplayCache();
 }
 
 function useOperator(operator){
+    prevOperator=currentOperator;
     shiftData();
     runCalc();
     storeData();
@@ -78,7 +82,8 @@ function useOperator(operator){
 function shiftData(){
     currentA = prevCalc;
     currentB = currentDisplay*1;
-}    
+}  
+
 function runCalc(){
     currentDisplay = operate(currentA, currentB, currentOperator);  
     setDisplay(currentDisplay);
@@ -134,6 +139,9 @@ function operate(a, b, opp){
             break;
         case "/":
             result = divide(a, b);
+            break;
+        case "=": 
+            result = operate(a, b, prevOperator);//basically something like this????
             break;
         default: 
             alert ("Uh-oh, captain... something went wrong.")

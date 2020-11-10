@@ -48,59 +48,32 @@ percButton.onclick = function(){
     currentDisplay/= 100;
     setDisplay(currentDisplay);
 };
-
-//Maybe simplify to make an event listener that differentiates operator by button (e.g. switch statement?) but otherwise has single function for this?
 addButton.onclick = function(){
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
-    currentOperator="+";
+    useOperator("+");
 }
-
 subButton.onclick = function(){
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
-    currentOperator="-";
+    useOperator("-");
 }
-
 divButton.onclick = function(){
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
-    currentOperator="/";
+    useOperator("/");
 }
-
 mulButton.onclick = function(){
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
-    currentOperator="*";
+    useOperator("*");
 }
-
 eqButton.onclick = function(){
     shiftData();
     runCalc();
+    //storeData();
+    clearDisplayCache();
 }
 
-
-//STICKING POINT --> a zero keeps sneaking in, so subtraction/addition works but not multiplication/division. FIRST run works, but not subsequent. Somthing wr)
-
-/*function runCalculation(){
-
-    currentA = prevCalc;
-    currentB = currentDisplay*1;    
-
-    currentDisplay = operate(currentA, currentB, currentOperator);  
-    setDisplay(currentDisplay);
-
-    prevCalc = currentDisplay*1;
-    currentDisplay = "0"; //<-- likely source of problems
-} */
+function useOperator(operator){
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
+    currentOperator=`${operator}`;
+}
 
 function shiftData(){
     currentA = prevCalc;

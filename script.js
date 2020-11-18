@@ -1,7 +1,4 @@
 /* 
-- create function to populate DISPLAY & updates with solution when operate is called
-- *KEY* Figure out how to store all values and call operator function with them.
-
 WATCH OUT
 - round numbers with long decimals
 
@@ -14,40 +11,40 @@ const addButton = document.getElementById("add"),
      subButton = document.getElementById("sub"),
      mulButton = document.getElementById("mult"),
      divButton = document.getElementById("divide"),
-     eqButton = document.getElementById("equals"),
-     backButton = document.getElementById("back"),
      clearButton = document.getElementById("clear"),
      reverseButton = document.getElementById("rev"),
-     percButton = document.getElementById("%");
+     percButton = document.getElementById("%"),
+     eqButton = document.getElementById("equals"),
+     backButton = document.getElementById("back"),
+     decimalButton = document.getElementById("."),
+     displayWindow = document.getElementById("display"),
+     digitGroup = document.getElementsByClassName("digit");
 
-const display = document.getElementById("display");
-
-let currentDisplay = "0",
-    currentA = 0, 
-    currentB = 0,
+let displayText = "0",
+    valueA = 0, 
+    valueB = 0,
     prevCalc = 0,
+    newCalc = 0,
     prevOperator = "+",
-    currentOperator = "+",
-    digitGroup = document.getElementsByClassName("digit");
-
-
+    newOperator = "+";
+    
 clearButton.onclick = function(){
     reset();
 };
 
 backButton.onclick = function(){
-    currentDisplay = removeLast(currentDisplay);
-    setDisplay(currentDisplay);
+    displayText = removeLast(displayText);
+    updateDisplay();
 };
 
-reverseButton.onclick = function(){ //problematic when currentDislay sets as zero.
-    currentDisplay*= -1;
-    setDisplay(currentDisplay);
+reverseButton.onclick = function(){ //problematic when displayText sets as zero.
+    displayText*= -1;
+    updateDisplay();
 };
 
 percButton.onclick = function(){
-    currentDisplay/= 100;
-    setDisplay(currentDisplay);
+    displayText/= 100;
+    updateDisplay();
 };
 addButton.onclick = function(){
     useOperator("+");
@@ -71,104 +68,79 @@ eqButton.onclick = function(){ //I need this to perform the calculation using th
 }
 
 function useOperator(operator){
-    prevOperator=currentOperator;
+    prevOperator=newOperator;
     shiftData();
     runCalc();
     storeData();
     clearDisplayCache();
-    currentOperator=`${operator}`;
+    newOperator=`${operator}`;
 }
 
 function shiftData(){
-    currentA = prevCalc;
-    currentB = currentDisplay*1;
+    valueA = prevCalc;
+    valueB = displayText*1;
 }  
 
 function runCalc(){
-    currentDisplay = operate(currentA, currentB, currentOperator);  
-    setDisplay(currentDisplay);
+    displayText = operate(valueA, valueB, newOperator);  
+    updateDisplay();
 }
 function storeData(){
-    prevCalc = currentDisplay*1;
+    prevCalc = displayText*1;
 }
 function clearDisplayCache(){
-    currentDisplay = "0"; //<-- likely source of problems
+    displayText = "0"; //<-- likely source of problems
 }
 function getInput(){
     for (let button in digitGroup){ //adds any digit to display when clicked
        digitGroup[button].addEventListener('click', function(){ //WHY is safari flagging as not a function? Seems to work...
-            currentDisplay += digitGroup[button].id;
-            setDisplay(currentDisplay);
+            displayText += digitGroup[button].id;
+            updateDisplay();
         });
     }
 }
 
-function setDisplay(newContent){
-    //TO DO: need to shorten if too long for display
-    newContent*=1;
-    display.textContent = `${newContent}`;
+function updateDisplay(){
+    displayWindow.textContent = displayText*1;
 }
 
 function clearDisplay(){
-    display.textContent = "0";
+    displayWindow.textContent = "0";
 }
 
 function reset(){
     clearDisplay();
-    currentDisplay = "0",
-    currentA = 0, 
-    currentB = 0,
-    prevCalc = 0,
-    currentOperator = "+";
+    displayText = "0";
+    valueA = 0;
+    valueB = 0;
+    prevCalc = 0;
+    newCalc = 0;
+    prevOperator = "+";
+    newOperator = "+";
 }
 
 function removeLast(str){
     return str.substr(0, str.length-1);
 }
 function operate(a, b, opp){
-    let result = 0;
-    switch (opp){
+    switch(opp){
         case "+":
-            result = add(a, b);
-            break;
+            return 1*a + 1*b;
         case "-":
-            result = subtract(a, b);
-            break;
+            return a-b;
         case "*":
-            result = multiply(a, b);
-            break;
-        case "/":
-            result = divide(a, b);
-            break;
-        case "=": 
-            result = operate(a, b, prevOperator);//basically something like this????
-            break;
+            return a*b;
+        case "/": 
+            if (b*1 === 0){
+                alert("You won't trick me into dividing by zero!"); 
+                return 0;
+            } else {
+                return a/b;
+            }
         default: 
-            alert ("Uh-oh, captain... something went wrong.")
-    }
-    return result;
-}
-function add(a, b){
-    a*=1;
-    b*=1;
-    return a + b;
-}
-
-function subtract(a, b){
-    return a - b;
-}
-
-function multiply(a, b){
-    return a * b;
-}
-
-function divide(a, b){
-    if (b === 0){
-        alert ("You won't fool me into dividing by zero! Fool me once, shame on you, fool me twice... Anyway, here's a zero.");
-        return 0;
-    } else {
-        return a / b;
+            alert("We've got a problem, captain...");
+            return 0;
     }
 }
 
-getInput(); //calls function with event listeners... needs to be adjusted to remove alerts
+getInput(); 

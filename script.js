@@ -25,8 +25,8 @@ let displayText = "0",
     valueB = 0,
     prevCalc = 0,
     newCalc = 0,
-    prevOperator = "+",
-    newOperator = "+";
+    prevOperator = "=",
+    newOperator = "=";
     
 clearButton.onclick = function(){
     reset();
@@ -58,36 +58,61 @@ divButton.onclick = function(){
 mulButton.onclick = function(){
     useOperator("*");
 }
-//THE PROBLEM IS THE END OF =, A 2ND HIT OF "=" or any other funtion thereafter causes issues. 
 
-eqButton.onclick = function(){ //I need this to perform the calculation using the previous operator if the current operator is already =. AND don't mess up the stored data.
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
+eqButton.onclick = function (){
+    evalTotal();
 }
 
-function useOperator(operator){
-    prevOperator=newOperator;
-    shiftData();
-    runCalc();
-    storeData();
-    clearDisplayCache();
-    newOperator=`${operator}`;
+function evalTotal(){
+    if (newOperator === "="){ 
+        //make the calculation with most recent result and previous valueB and previous operator.
+        //this seems to be working well sequentially with all operators.
+        valueA = newCalc;
+        newCalc = operate(valueA, valueB, prevOperator);
+        storeAndUpdateDisplay();
+    } else {//WIP
+        valueA = valueB; 
+        valueB = displayText;
+        newCalc = operate(valueA, valueB, newOperator);
+        storeAndUpdateDisplay();
+        prevOperator = newOperator; //store most recent operator
+    }
+    newOperator = "=";
 }
 
-function shiftData(){
+function useOperator(opp){//WIP
+    if (newOperator === "="){ //act as if we're working from clean slate
+        valueA = newCalc;
+        valueB = displayText*1;
+        newOperator = `${opp}`;
+        displayText = "0";
+    } else {//WIP
+        valueA = valueB; 
+        valueB = displayText*1;
+        newCalc = operate(valueA, valueB, newOperator);
+        storeAndUpdateDisplay();
+        prevOperator = newOperator; //store most recent operator
+    }
+}
+function updateOperator(opp){
+    prevOperator = newOperator;
+    newOperator = opp;
+}
+
+function storeAndUpdateDisplay(){
+    displayText = newCalc;  
+    updateDisplay(); 
+    displayText = "0"; 
+}
+
+function shiftValues(){
     valueA = prevCalc;
     valueB = displayText*1;
 }  
+function storeResult(){
+    prevCalc = newCalc;
+}
 
-function runCalc(){
-    displayText = operate(valueA, valueB, newOperator);  
-    updateDisplay();
-}
-function storeData(){
-    prevCalc = displayText*1;
-}
 function clearDisplayCache(){
     displayText = "0"; //<-- likely source of problems
 }
@@ -115,8 +140,8 @@ function reset(){
     valueB = 0;
     prevCalc = 0;
     newCalc = 0;
-    prevOperator = "+";
-    newOperator = "+";
+    prevOperator = "=";
+    newOperator = "=";
 }
 
 function removeLast(str){
@@ -137,6 +162,8 @@ function operate(a, b, opp){
             } else {
                 return a/b;
             }
+        case "=":
+            return b;
         default: 
             alert("We've got a problem, captain...");
             return 0;
@@ -144,3 +171,34 @@ function operate(a, b, opp){
 }
 
 getInput(); 
+//THE PROBLEM IS THE END OF =, A 2ND HIT OF "=" or any other funtion thereafter causes issues. 
+
+/* PREVIOUS APPROACH - hold for reference
+eqButton.onclick = function(){ //I need this to perform the calculation using the previous operator if the current operator is already =. AND don't mess up the stored data.
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
+}
+
+function useOperator(operator){
+    prevOperator=newOperator;
+    shiftData();
+    runCalc();
+    storeData();
+    clearDisplayCache();
+    newOperator=`${operator}`;
+}
+
+function shiftData(){
+    valueA = prevCalc;
+    valueB = displayText*1;
+}  
+
+function runCalc(){
+    displayText = operate(valueA, valueB, newOperator);  
+    updateDisplay();
+}
+function storeData(){
+    prevCalc = displayText*1;
+}*/
